@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Goodnight Hamdi</title>
+<style>
+  body, html {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Comic Sans MS', cursive;
+  }
+
+  #message {
+    color: #ffcc00;
+    font-size: clamp(2rem, 5vw, 3em);
+    opacity: 0;
+    transition: opacity 2s;
+    text-align: center;
+  }
+
+  .heart {
+    animation: flicker 1s infinite;
+    display: inline-block;
+  }
+
+  @keyframes flicker {
+    0%, 100% { text-shadow: 0 0 5px red; transform: scale(1); }
+    50% { text-shadow: 0 0 20px orange; transform: scale(1.2); }
+  }
+
+  .star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0;
+    animation: twinkle 2s infinite;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+</style>
+</head>
+<body>
+
+<div id="message">Goodnight Hamdi, Love you <span class="heart">❤️‍🔥</span></div>
+
+<script>
+  const message = document.getElementById('message');
+  const body = document.body;
+
+  // Create stars
+  for (let i = 0; i < 50; i++) {
+    const star = document.createElement('div');
+    sta
