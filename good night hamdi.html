@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Goodnight Hamdi</title>
+<style>
+  body, html {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Comic Sans MS', cursive;
+  }
+
+  #curtain {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    z-index: 10;
+  }
+
+  #bear {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    cursor: pointer;
+    z-index: 15;
+  }
+
+  #message {
+    position: absolute;
+    color: #ffcc00;
+    font-size: 3em;
+    opacity: 0;
+    transition: opacity 2s;
+    z-index: 5;
+    text-align: center;
+  }
+
+  .heart {
+    animation: flicker 1s infinite;
+  }
+
+  @keyframes flicker {
+    0%, 100% { text-shadow: 0 0 5px red; }
+    50% { text-shadow: 0 0 20px orange; }
+  }
+
+  .star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0;
+    animation: twinkle 2s infinite;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+</style>
+</head>
+<body>
+
+<div id="curtain"></div>
+<img id="bear" src="https://i.ibb.co/1Xy3n7K/cute-bear.png" alt="Bear" title="Click me!">
+<div id="message">Goodnight Hamdi</div>
+
+<script>
+  const bear = document.getElementById('bear');
+  const curtain = document.getElementById('curtain');
+  const message = document.getElementById('message');
+  const body = document.body;
+
+  // Create stars
+  const stars = [];
+  for (let i = 0; i < 50; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.style.width = star.style.height = Math.random() * 3 + 1 + 'px';
+    star.style.top = Math.random() * 100 + '%';
+    star.style.left = Math.random() * 100 + '%';
+    star.style.animationDuration = (Math.random() * 2 + 1) + 's';
+    star.style.animationDelay = Math.random() * 2 + 's';
+    body.appendChild(star);
+    stars.push(star);
+  }
+
+  bear.addEventListener('click', () => {
+    // Animate curtain pulling down
+    curtain.style.transition = 'top 2s ease';
+    curtain.style.top = '100%';
+
+    // Show stars after curtain animation
+    setTimeout(() => {
+      stars.forEach(star => star.style.opacity = 1);
+      message.style.opacity = 1;
+    }, 2000);
+
+    // After 3 seconds, change message to "Love you ❤️‍🔥"
+    setTimeout(() => {
+      message.innerHTML = 'Love you <span class="heart">❤️‍🔥</span>';
+    }, 5000);
+  });
+</script>
+
+</body>
+</html>
